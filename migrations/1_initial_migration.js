@@ -1,5 +1,5 @@
 const Token = artifacts.require("Token");
 
-module.exports = function (deployer) {
+module.exports = async function (deployer) {
   deployer.deploy(Token, "Blocos", "BRLB", 100000000);
 };

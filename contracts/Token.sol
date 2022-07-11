@@ -6,9 +6,9 @@ contract Token {
     constructor(string memory name_, string memory symbol_, uint totalSupply_) public {
         _name = name_;
         _symbol = symbol_;
-        _totalSupply = totalSupply_;
         _decimals = 18;
-        _mint(msg.sender, _totalSupply);
+        _mint(msg.sender, 100000000);
+        _totalSupply = balanceOf(msg.sender);
     }
 
     mapping(address => uint256) private _balances;
