@@ -3,30 +3,63 @@ pragma solidity ^0.8.15;
 
 contract Token {
 
-    constructor(string memory name_, string memory symbol_, uint totalSupply_) public {
+    constructor(string memory name_, string memory symbol_) public {
         _name = name_;
         _symbol = symbol_;
         _decimals = 18;
-        _mint(msg.sender, 100000000);
-        _totalSupply = balanceOf(msg.sender);
+        _owner = msg.sender;
+        admin[msg.sender] = true;
     }
 
     mapping(address => uint256) private _balances;
     mapping(address => mapping(address => uint)) _allowed;
+    mapping(address => bool) admin;
     uint _totalSupply;
     string _name;
     string _symbol;
     uint8 _decimals;
+    uint _maxSupply;
+    address _owner;
+
 
     event Transfer(address, address, uint);
     event Approval(address, address, uint);
+    event AdminSet(address);
+    event OwnershipTransfered(address);
+
+    modifier onlyOwner {
+        require(msg.sender == _owner, "Only owner is able to access this function");
+        _;
+    }
+
+    modifier onlyAdmin {
+        require(msg.sender == _owner || admin[msg.sender] == true, "You don't have permission to access this function");
+        _;
+    }
+
+    /**
+    * @dev return the name of the token
+    * @return the name as string
+     */
 
     function name() public view returns (string memory){
         return _name;
     }
+
+        /**
+    * @dev return the symbol of the token
+    * @return the symbol as string
+     */
+
     function symbol() public view returns (string memory){
         return _symbol;
     }
+
+        /**
+    * @dev return the decimals of the token
+    * @return the decimals as uint
+     */
+
     function decimals() public view returns (uint8){
         return _decimals;
     }
@@ -40,6 +73,56 @@ contract Token {
         return _totalSupply;
     }
 
+    /**
+    * @dev function to return the address of the _owner
+     */
+
+    function getOwner() external view returns(address){
+        return _owner;
+    }
+
+    /**
+    * @dev function to get the remaining tokens
+    * @return the result of the maximum supply minus the total supply as uint
+     */
+
+    function remainingTokens() external view returns(uint){
+        uint result = _maxSupply - _totalSupply;
+        return result;
+    }    
+
+    /**
+    * @dev set an address as admin
+    * @param _address address that you wanna turn admin
+     */
+    
+    function setAdmin(address _address) external onlyOwner returns(bool){
+        admin[_address] = true;
+        emit AdminSet(_address);
+        return true;
+    }
+
+    /**
+    * @dev sets the maximum supply
+    * @param amount amount of the maximum supply
+    */
+
+    function setMaxSupply(uint amount) external onlyOwner returns(bool){
+        _maxSupply = amount;
+        return true;
+    }
+
+    /**
+    * @dev transfer ownership
+    * @param _address address that the owner wants to turn into the new owner.
+     */
+
+    function transferOwnership(address _address) external onlyOwner returns(bool){
+        _owner = _address;
+        emit OwnershipTransfered(_address);
+        return true;
+    }
+
     /** 
     * @dev function that return the balance of an specific address
     * @param owner the address that you want to know the balance
@@ -47,6 +130,28 @@ contract Token {
 
     function balanceOf(address owner) public view returns(uint){
         return _balances[owner];
+    }
+
+    /**
+    * @dev set the total supply
+     */
+
+    function setTotalSupply(uint amount) external onlyOwner returns(bool){
+        _totalSupply = amount;
+        return true;
+    }
+
+    /**
+    * @dev allow owner to mint to specific addresses
+    * @param to address where the tokens should go
+    * @param amount number of tokens that you want to send
+    */
+
+    function ownerMint(address to, uint amount) external onlyAdmin returns(bool){
+        require(_totalSupply < _maxSupply, "The max supply has already be meet");
+        _mint(to, amount);
+        emit Transfer(address(0), to, amount);
+        return true;
     }
 
     /**
