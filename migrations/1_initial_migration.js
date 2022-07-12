@@ -1,5 +1,8 @@
-const Token = artifacts.require("Token");
+const { deployProxy } = require('@openzeppelin/truffle-upgrades');
+
+const Token = artifacts.require('Token');
 
 module.exports = async function (deployer) {
-  deployer.deploy(Token, "Blocos", "BRLB", 100000000);
+  const instance = await deployProxy(Token, { deployer });
+  console.log('Deployed', instance.address);
 };

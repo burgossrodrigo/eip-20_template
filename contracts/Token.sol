@@ -1,11 +1,13 @@
 //SPDX-License-Identifier: unlicensed
 pragma solidity ^0.8.15;
 
-contract Token {
+import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 
-    constructor(string memory name_, string memory symbol_) public {
-        _name = name_;
-        _symbol = symbol_;
+contract Token is Initializable {
+
+    function initialize() initializer public {
+        _name = "Blocos";
+        _symbol = "BLC";
         _decimals = 18;
         _owner = msg.sender;
         admin[msg.sender] = true;

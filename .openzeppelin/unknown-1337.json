@@ -1,0 +1,117 @@
+{
+  "manifestVersion": "3.2",
+  "admin": {
+    "address": "0x113A6dB34e3314341F6fAEF02Fe1d2E4B425657B",
+    "txHash": "0x15606c0674101fb0d8961e75ceeaf6e866ad067ea8b4674286616f92e07a552a"
+  },
+  "proxies": [
+    {
+      "address": "0x2F0bB23C53Be7bC9edA1Ff53c00fFe8a6bc9228D",
+      "txHash": "0xb65eb75f733842aa0923042a070797928638346c5ce823956ca7fd5aa2f30765",
+      "kind": "transparent"
+    }
+  ],
+  "impls": {
+    "2c74956b415b4412df771ae11b5ce34e15531efc03757fae777f08e27656fe44": {
+      "address": "0xb4EF179E6f18DEEeF9fF9b7674589e35C0381609",
+      "txHash": "0xaa2506fa8f6ac30f41c66a4df52771e5c0593b7e7df0c3477533b723665c0999",
+      "layout": {
+        "storage": [
+          {
+            "contract": "Initializable",
+            "label": "_initialized",
+            "type": "t_uint8",
+            "src": "..\\@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:62",
+            "retypedFrom": "bool"
+          },
+          {
+            "contract": "Initializable",
+            "label": "_initializing",
+            "type": "t_bool",
+            "src": "..\\@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:67"
+          },
+          {
+            "contract": "Token",
+            "label": "_balances",
+            "type": "t_mapping(t_address,t_uint256)",
+            "src": "..\\project:\\contracts\\Token.sol:16"
+          },
+          {
+            "contract": "Token",
+            "label": "_allowed",
+            "type": "t_mapping(t_address,t_mapping(t_address,t_uint256))",
+            "src": "..\\project:\\contracts\\Token.sol:17"
+          },
+          {
+            "contract": "Token",
+            "label": "admin",
+            "type": "t_mapping(t_address,t_bool)",
+            "src": "..\\project:\\contracts\\Token.sol:18"
+          },
+          {
+            "contract": "Token",
+            "label": "_totalSupply",
+            "type": "t_uint256",
+            "src": "..\\project:\\contracts\\Token.sol:19"
+          },
+          {
+            "contract": "Token",
+            "label": "_name",
+            "type": "t_string_storage",
+            "src": "..\\project:\\contracts\\Token.sol:20"
+          },
+          {
+            "contract": "Token",
+            "label": "_symbol",
+            "type": "t_string_storage",
+            "src": "..\\project:\\contracts\\Token.sol:21"
+          },
+          {
+            "contract": "Token",
+            "label": "_decimals",
+            "type": "t_uint8",
+            "src": "..\\project:\\contracts\\Token.sol:22"
+          },
+          {
+            "contract": "Token",
+            "label": "_maxSupply",
+            "type": "t_uint256",
+            "src": "..\\project:\\contracts\\Token.sol:23"
+          },
+          {
+            "contract": "Token",
+            "label": "_owner",
+            "type": "t_address",
+            "src": "..\\project:\\contracts\\Token.sol:24"
+          }
+        ],
+        "types": {
+          "t_mapping(t_address,t_uint256)": {
+            "label": "mapping(address => uint256)"
+          },
+          "t_address": {
+            "label": "address"
+          },
+          "t_uint256": {
+            "label": "uint256"
+          },
+          "t_mapping(t_address,t_mapping(t_address,t_uint256))": {
+            "label": "mapping(address => mapping(address => uint256))"
+          },
+          "t_mapping(t_address,t_bool)": {
+            "label": "mapping(address => bool)"
+          },
+          "t_bool": {
+            "label": "bool"
+          },
+          "t_string_storage": {
+            "label": "string"
+          },
+          "t_uint8": {
+            "label": "uint8"
+          }
+        }
+      }
+    }
+  }
+}
